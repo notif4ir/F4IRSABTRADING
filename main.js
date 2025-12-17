@@ -64,16 +64,35 @@ function renderSlot(side, index) {
     return;
   }
 
+  const effectiveMultiplier = item.multiplier ?? 1;
+  const effectiveValue = Math.round(item.value * effectiveMultiplier);
+
   const label = document.createElement("span");
   label.className = "slot-label";
   label.textContent = item.name;
 
   const value = document.createElement("span");
   value.className = "slot-value";
-  value.textContent = `Value: ${item.value}`;
+  value.textContent = `Value: ${effectiveValue}`;
+
+  const defaultGen = document.createElement("span");
+  defaultGen.className = "slot-gen-default";
+  defaultGen.textContent = `Default Gen: ${item.defaultGen ?? "-"}`;
+
+  const userGen = document.createElement("span");
+  userGen.className = "slot-gen-user";
+  if (item.userGen) {
+    userGen.textContent = `Your Gen: ${item.userGen}`;
+  } else {
+    userGen.textContent = "";
+  }
 
   slotEl.appendChild(label);
   slotEl.appendChild(value);
+  slotEl.appendChild(defaultGen);
+  if (item.userGen) {
+    slotEl.appendChild(userGen);
+  }
 }
 
 // Popup
@@ -130,7 +149,21 @@ function renderItemsList(filterText = "") {
     row.addEventListener("click", () => {
       if (!currentSelection) return;
       const { side, index } = currentSelection;
-      slotsState[side][index] = { ...item };
+
+      const selection = getGenerationSelection(item);
+      if (!selection) {
+        // user cancelled or never provided valid input
+        return;
+      }
+
+      const { userGenString, multiplier } = selection;
+
+      slotsState[side][index] = {
+        ...item,
+        userGen: userGenString,
+        multiplier
+      };
+
       renderSlot(side, index);
       updateTotalsAndRatio();
       closePopup();
@@ -165,7 +198,11 @@ function updateTotalsAndRatio() {
 }
 
 function sumSide(side) {
-  return slotsState[side].reduce((acc, item) => acc + (item ? item.value : 0), 0);
+  return slotsState[side].reduce((acc, item) => {
+    if (!item) return acc;
+    const m = item.multiplier ?? 1;
+    return acc + item.value * m;
+  }, 0);
 }
 
 /**
@@ -213,5 +250,87 @@ function describeTrade(percent) {
   if (percent > 30) return "Bad Trade";
   if (percent > 15) return "Very Bad Trade";
   return "Horrible Trade";
+}
+
+/**
+ * Ask the user for a generation string for an item, validate it,
+ * and return the normalized string plus a scaled multiplier.
+ * Returns null if the user cancels out.
+ */
+function getGenerationSelection(item) {
+  const defaultGen = item.defaultGen || "$1/s";
+  const baseParsed = parseGenString(defaultGen);
+  const baseValue = baseParsed ? baseParsed.numeric : 1;
+
+  let input = defaultGen;
+  // Loop until valid or user cancels
+  // Accepts formats like "$10/s", "10/s", "10", "2M/s", "5.5K", etc.
+  // Normalizes to "$<number><suffix>/s"
+  // If format not understood, shows an error and asks again.
+  // If user hits cancel, returns null.
+  // We keep the last invalid attempt in the prompt for convenience.
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const promptText = `Enter generation for "${item.name}" (e.g. $10/s, $2M/s, 5.5K/s)\nDefault: ${defaultGen}`;
+    const result = window.prompt(promptText, input);
+
+    if (result === null) {
+      return null;
+    }
+
+    const parsed = parseGenString(result);
+    if (!parsed) {
+      window.alert("Invalid format. Use something like $10/s, $2M/s, or 5.5K/s.");
+      input = result;
+      continue;
+    }
+
+    const userNumeric = parsed.numeric;
+    const ratio = userNumeric / baseValue;
+
+    // Slowly scaling multiplier:
+    //  ratio = 1  => 1x
+    //  ratio = 2  => 1.5x
+    //  ratio = 0.5 => 0.75x
+    let multiplier = 1 + (ratio - 1) * 0.5;
+    multiplier = Math.max(0.1, multiplier);
+
+    return {
+      userGenString: parsed.normalized,
+      multiplier
+    };
+  }
+}
+
+/**
+ * Parse a generation string like "$10/s", "10/s", "2M", "5.5K/s"
+ * into a numeric value and normalized string.
+ * Returns null if not understood.
+ */
+function parseGenString(raw) {
+  if (!raw) return null;
+
+  let s = String(raw).trim().toUpperCase();
+
+  // Remove leading $ and trailing /S if present
+  if (s.startsWith("$")) s = s.slice(1);
+  if (s.endsWith("/S")) s = s.slice(0, -2);
+  if (s.endsWith("/")) s = s.slice(0, -1);
+
+  const match = /^(\d+(\.\d+)?)([KMB])?$/.exec(s);
+  if (!match) return null;
+
+  const num = parseFloat(match[1]);
+  const suffix = match[3] || "";
+
+  let factor = 1;
+  if (suffix === "K") factor = 1_000;
+  else if (suffix === "M") factor = 1_000_000;
+  else if (suffix === "B") factor = 1_000_000_000;
+
+  const numeric = num * factor;
+  const normalized = `$${num}${suffix}/s`;
+
+  return { numeric, normalized };
 }
 
