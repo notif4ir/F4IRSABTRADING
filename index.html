@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>F4IR Sab Trading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>F4IR Sab Trading</h1>
+      <div class="ratio-bar">
+        <div class="ratio-bar-top">
+          <span class="ratio-label side-you">You</span>
+          <span class="ratio-percent" id="ratioPercent">50%</span>
+          <span class="ratio-label side-them">Them</span>
+        </div>
+        <div class="ratio-bar-track">
+          <div class="ratio-bar-fill" id="ratioBarFill"></div>
+        </div>
+        <div class="ratio-text" id="ratioLabel">Fair Trade</div>
+      </div>
+    </header>
+
+    <main class="trade-layout">
+      <section class="trade-column">
+        <div class="trade-column-title">You</div>
+        <div class="slot-grid" data-side="you">
+          <!-- 9 slots -->
+          <button class="slot empty" data-side="you" data-index="0">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="1">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="2">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="3">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="4">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="5">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="6">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="7">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="you" data-index="8">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+        </div>
+        <div class="total-value" id="youTotal">Total: 0</div>
+      </section>
+
+      <section class="trade-column">
+        <div class="trade-column-title">Them</div>
+        <div class="slot-grid" data-side="them">
+          <!-- 9 slots -->
+          <button class="slot empty" data-side="them" data-index="0">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="1">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="2">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="3">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="4">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="5">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="6">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="7">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+          <button class="slot empty" data-side="them" data-index="8">
+            <span class="slot-label">Empty</span>
+            <span class="slot-icon">+</span>
+          </button>
+        </div>
+        <div class="total-value" id="themTotal">Total: 0</div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Item picker popup -->
+  <div class="popup-backdrop" id="popupBackdrop">
+    <div class="popup-panel">
+      <div class="popup-header">
+        <span id="popupTitle">Select item</span>
+        <button class="popup-close" id="popupCloseBtn">&times;</button>
+      </div>
+      <div class="popup-body">
+        <div class="popup-search">
+          <input
+            type="text"
+            id="itemSearch"
+            class="popup-search-input"
+            placeholder="Search items..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="item-list" id="itemList">
+          <!-- items injected by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
+
