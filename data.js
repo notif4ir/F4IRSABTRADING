@@ -6,13 +6,13 @@ export const ITEMS = [
   { name: "Noo My Hotspot", value: 1750, defaultGen: "$1.1M/s" },
   { name: "Quesadilla Crocodila", value: 2900, defaultGen: "$3M/s" },
   { name: "Los Nooo My Hotspotsitos", value: 6250, defaultGen: "$6.5M/s" },
-  { name: "Tacorita Bicicleta", value: 23500, defaultGen: "$16.5M/s" },
+  { name: "Tacorita Bicicleta", value: 25500, defaultGen: "$16.5M/s" },
   { name: "Chillin Chili", value: 47500, defaultGen: "$25M/s" },
   { name: "Quesadillo Vampiro", value: 8500, defaultGen: "$3.5M/s" },
   { name: "Chipso and Queso", value: 52500, defaultGen: "$25M/s" },
   { name: "La Taco Combinasion", value: 62500, defaultGen: "$35M/s" },
   { name: "Los Burritos", value: 5550, defaultGen: "$4.5M/s" },
-  { name: "Los Tacoritas", value: 42500, defaultGen: "$32M/s" },
+  { name: "Los Tacoritas", value: 52500, defaultGen: "$32M/s" },
   { name: "Los Hotspotsitos", value: 35000, defaultGen: "$20M/s" },
   { name: "Los 25", value: 11000, defaultGen: "$10M/s" },
   { name: "Los Combinasionas", value: 14000, defaultGen: "$15M/s" },
@@ -22,6 +22,6 @@ export const ITEMS = [
   { name: "Chicleteira Noelteira", value: 18500, defaultGen: "$15M/s" },
   { name: "Los Candies", value: 25000, defaultGen: "$23M/s" },
   { name: "Ho Ho Ho Sahur", value: 4000, defaultGen: "$3.2M/s" },
-  { name: "Cooki and Milki", value: 175000, defaultGen: "$155M/s" }
+  { name: "Cooki and Milki", value: 185000, defaultGen: "$155M/s" }
 ];
 
