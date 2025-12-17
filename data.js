@@ -16,6 +16,12 @@ export const ITEMS = [
   { name: "Los Hotspotsitos", value: 35000, defaultGen: "$20M/s" },
   { name: "Los 25", value: 11000, defaultGen: "$10M/s" },
   { name: "Los Combinasionas", value: 14000, defaultGen: "$15M/s" },
-  { name: "Los Mobilis", value: 26000, defaultGen: "$22M/s" }
+  { name: "Los Mobilis", value: 26000, defaultGen: "$22M/s" },
+  { name: "Los Chicleteiras", value: 9000, defaultGen: "$7M/s" },
+  { name: "Chicleteira Biciciliteria", value: 4000, defaultGen: "$3.5M/s" },
+  { name: "Chicleteira Noelteira", value: 18500, defaultGen: "$15M/s" },
+  { name: "Los Candies", value: 25000, defaultGen: "$23M/s" },
+  { name: "Ho Ho Ho Sahur", value: 4000, defaultGen: "$3.2M/s" },
+  { name: "Cooki and Milki", value: 175000, defaultGen: "$155M/s" }
 ];
 
