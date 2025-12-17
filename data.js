@@ -22,6 +22,22 @@ export const ITEMS = [
   { name: "Chicleteira Noelteira", value: 18500, defaultGen: "$15M/s" },
   { name: "Los Candies", value: 25000, defaultGen: "$23M/s" },
   { name: "Ho Ho Ho Sahur", value: 4000, defaultGen: "$3.2M/s" },
+  { name: "Swaggy Bros", value: 60000, defaultGen: "$40M/s" },
+  { name: "La Supreme Combinasion", value: 80000, defaultGen: "$40M/s" },
+  { name: "Dragon Cannelloni", value: 220000, defaultGen: "$200M/s" },
+  { name: "Burguro And Fryuro", value: 180000, defaultGen: "$150M/s" },
+  { name: "La Secret Combinasion", value: 105000, defaultGen: "$125M/s" },
+  { name: "Capitano Moby", value: 170000, defaultGen: "$160M/s" },
+  { name: "Spaghetti Tualetti", value: 55000, defaultGen: "$60M/s" },
+  { name: "Garama and Madundung", value: 65000, defaultGen: "$50M/s" },
+  { name: "Ketchuru And Musturu", value: 57500, defaultGen: "$42.5M/s" },
+  { name: "Tictac Sahur", value: 52500, defaultGen: "$37.5M/s" },
+  { name: "Ketupat Kepat", value: 47500, defaultGen: "$35M/s" },
+  { name: "Swag Soda", value: 12500, defaultGen: "$13M/s" },
+  { name: "Reinito Sleighito", value: 185000, defaultGen: "$140M/s" },
+  { name: "Chimnino", value: 15500, defaultGen: "$14M/s" },
+  { name: "Santa Hotspot", value: 2800, defaultGen: "$2.6M/s" },
+  { name: "La Ginger Sekolah", value: 105000, defaultGen: "$75M/s" },
   { name: "Cooki and Milki", value: 185000, defaultGen: "$155M/s" }
 ];
 
